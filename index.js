@@ -44,6 +44,19 @@ function render() {
     // 파티클 지우기
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
+    confetti({
+      x: 0, // 0~1
+      y: 0.5, // 0~1
+      count: 5,
+      deg: -50, // 좌측
+    });
+    confetti({
+      x: 1, // 0~1
+      y: 0.5, // 0~1
+      count: 5,
+      deg: -130, // 우측
+    });
+
     // 파티클 그리기
     for (let i = particles.length - 1; i >= 0; i--) {
       particles[i].update();
@@ -60,17 +73,17 @@ function render() {
   requestAnimationFrame(frame);
 }
 
-window.addEventListener("click", () => {
-  confetti({
-    x: 0, // 0~1
-    y: 0.8, // 0~1
-    count: 10,
-    deg: -50,
-    colors: ["#FF577F", "#FF884B", "#FFD384", "#FFF9B0"],
-    shapes: ["circle", "square"],
-    spread: 30,
-  });
-});
+// window.addEventListener("click", () => {
+//   confetti({
+//     x: 0, // 0~1
+//     y: 0.8, // 0~1
+//     count: 10,
+//     deg: -50,
+//     colors: ["#FF577F", "#FF884B", "#FFD384", "#FFF9B0"],
+//     shapes: ["circle", "square"],
+//     spread: 30,
+//   });
+// });
 
 window.addEventListener("load", () => {
   init();
