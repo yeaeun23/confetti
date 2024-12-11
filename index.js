@@ -2,7 +2,7 @@ import Particle from "./js/Particle.js";
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const dpr = window.devicePixelRatio > 1 ? 2 : 1;
+const dpr = window.devicePixelRatio > 1 ? 1 : 1; // 2:1
 let canvasWidth, canvasHeight;
 const fps = 60;
 const interval = 1000 / fps;
@@ -21,9 +21,9 @@ function init() {
   ctx.scale(dpr, dpr);
 }
 
-function confetti({ x, y, count, deg }) {
+function confetti({ x, y, count, deg, colors }) {
   for (let i = 0; i < count; i++) {
-    particles.push(new Particle(x, y, deg));
+    particles.push(new Particle(x, y, deg, colors));
   }
 }
 
@@ -62,10 +62,11 @@ function render() {
 
 window.addEventListener("click", () => {
   confetti({
-    x: 0,
-    y: canvasHeight / 2,
+    x: 0, // 0~1
+    y: 0.5, // 0~1
     count: 10,
     deg: -50,
+    colors: ["#FF0000"],
   });
 });
 
