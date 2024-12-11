@@ -30,6 +30,7 @@ function confetti({ x, y, count, deg, colors, shapes, spread }) {
 function render() {
   let now, delta;
   let then = Date.now();
+  let deg = 0;
 
   const frame = () => {
     requestAnimationFrame(frame);
@@ -44,17 +45,28 @@ function render() {
     // 파티클 지우기
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
+    deg += 1;
+
     confetti({
-      x: 0, // 0~1
-      y: 0.5, // 0~1
+      x: 0.5,
+      y: 0.5,
       count: 5,
-      deg: -50, // 좌측
+      deg: 225 + deg,
+      spread: 1,
     });
     confetti({
-      x: 1, // 0~1
-      y: 0.5, // 0~1
+      x: 0.5,
+      y: 0.5,
       count: 5,
-      deg: -130, // 우측
+      deg: 90 + deg,
+      spread: 1,
+    });
+    confetti({
+      x: 0.5,
+      y: 0.5,
+      count: 5,
+      deg: 315 + deg,
+      spread: 1,
     });
 
     // 파티클 그리기
@@ -62,7 +74,11 @@ function render() {
       particles[i].update();
       particles[i].draw(ctx);
 
+      // 불필요한 파티클 지우기
       if (particles[i].opacity <= 0) {
+        particles.splice(i, 1);
+      }
+      if (particles[i].y > canvasHeight) {
         particles.splice(i, 1);
       }
     }
